@@ -3,6 +3,8 @@ import 'package:navigation/pages/events_page.dart';
 import 'package:navigation/pages/home_page.dart';
 import 'package:navigation/pages/initial_page.dart';
 import 'package:navigation/pages/login_page.dart';
+import 'package:navigation/wrappers/home_wrapper.dart';
+import 'package:navigation/wrappers/initial_wrapper.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -10,7 +12,7 @@ import 'package:navigation/pages/login_page.dart';
     AutoRoute(
       initial: true,
       path: '/',
-      page: InitialWrapper,
+      page: InitialWrapper, // Core Blocs Initializations
       children: [
         AutoRoute(
           path: '',
@@ -22,7 +24,8 @@ import 'package:navigation/pages/login_page.dart';
         ),
         AutoRoute(
           path: 'home',
-          page: HomeWrapper,
+          name: 'MainRouter',
+          page: HomeWrapper, // Home Blocs Initializations
           children: [
             AutoRoute(
               path: '',
@@ -32,6 +35,7 @@ import 'package:navigation/pages/login_page.dart';
               path: 'events',
               page: EventsPage,
             ),
+            RedirectRoute(path: '*', redirectTo: ''),
           ],
         ),
         RedirectRoute(path: '*', redirectTo: ''),
